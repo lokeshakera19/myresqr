@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>User Profile for <%= userData.fullName %></title>
+   <style>
+      body {
+         font-family: Arial, sans-serif;
+         background-color: #f4f4f4;
+         padding: 20px;
+      }
+      .profile-container {
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         max-width: 600px;
+         margin: 0 auto;
+      }
+      h1 {
+         color: #333;
+         text-align: center;
+      }
+      .profile-field {
+         margin-bottom: 10px;
+      }
+      .profile-field label {
+         font-weight: bold;
+      }
+      .profile-field p {
+         margin: 0;
+         color: #555;
+      }
+      .profile-pic {
+         width: 150px;
+         border-radius: 50%;
+         display: block;
+         margin: 0 auto;
+      }
+      #form2 {
+         display: none;
+      }
+      .button-container {
+         text-align: center;
+      }
+      button {
+         padding: 10px 15px;
+         margin: 10px;
+         background-color: #28a745;
+         color: white;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+      }
+      button:hover {
+         background-color: #218838;
+      }
+   </style>
+   <script>
+      function showForm2() {
+         // Show Form 2 and hide Form 1
+         document.getElementById('form1').style.display = 'none';
+         document.getElementById('form2').style.display = 'block';
+      }
+
+      function sendlocation() {
+         // Get the user's location
+         if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+               const latitude = position.coords.latitude;
+               const longitude = position.coords.longitude;
+
+               // Prepare data to send
+               const username = '<%= userData.fullName %>'; // Get username from userData
+               const data = { username: username, latitude: latitude, longitude: longitude };
+
+               // Send location data to the server using fetch
+               fetch('/send-location', {
+                  method: 'POST',
+                  headers: {
+                     'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(data)
+               })
+               .then(response => response.json())
+               .then(data => {
+                  alert('Location sent to nearest hospital.');
+               })
+               .catch((error) => {
+                  console.error('Error sending location:', error);
+               });
+            }, function() {
+               alert('Geolocation is not enabled or permission denied.');
+            });
+         } else {
+            alert('Geolocation is not supported by this browser.');
+         }
+      }
+
+      function informfamily() {
+         if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+               const latitude = position.coords.latitude;
+               const longitude = position.coords.longitude;
+
+               // Prepare data to send
+               const username = '<%= userData.fullName %>'; // Get username from userData
+               const data = { username: username, latitude: latitude, longitude: longitude };
+
+               // Send location data to the server using fetch
+               fetch('/send-locationtofamily', {
+                  method: 'POST',
+                  headers: {
+                     'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(data)
+               })
+               .then(response => response.json())
+               .then(data => {
+                  alert('Location sent to nearest hospital.');
+               })
+               .catch((error) => {
+                  console.error('Error sending location:', error);
+               });
+            }, function() {
+               alert('Geolocation is not enabled or permission denied.');
+            });
+         } else {
+            alert('Geolocation is not supported by this browser.');
+         }
+      }
+   </script>
+</head>
+<body>
+
+   <div class="profile-container">
+      <!-- Form 1: Ask if the person in the photo is the same -->
+      <div id="form1">
+         <h2>Is this you?</h2>
+         <img src="/<%= userData.photo %>" alt="User Photo" class="profile-pic">
+         <div class="profile-field">
+            <label>Is the person in the photo the same as you?</label><br>
+            <input type="radio" id="yes" name="isSamePerson" value="yes" onclick="showForm2()"> Yes
+            <input type="radio" id="no" name="isSamePerson" value="no"> No
+         </div>
+      </div>
+
+      <!-- Form 2: Display user details if they confirmed in Form 1 -->
+      <div id="form2">
+         <h2>User Details</h2>
+         <img src="/<%= userData.photo %>" alt="User Photo" class="profile-pic">
+
+         <div class="profile-field">
+            <label>Full Name:</label>
+            <p><%= userData.fullName %></p>
+         </div>
+
+         <div class="profile-field">
+            <label>Father's Name:</label>
+            <p><%= userData.fatherName %></p>
+         </div>
+
+         <div class="profile-field">
+            <label>Mother's Name:</label>
+            <p><%= userData.motherName %></p>
+         </div>
+
+         <div class="profile-field">
+            <label>Phone Number:</label>
+            <p><%= userData.phoneNumber %></p>
+         </div>
+
+         <div class="profile-field">
+            <label>Blood Group:</label>
+            <p><%= userData.bloodGroup %></p>
+         </div>
+
+         <div class="profile-field">
+            <label>Permanent Address:</label>
+            <p><%= userData.permanentAddress %></p>
+         </div>
+
+         <div class="profile-field">
+            <label>Temporary Address:</label>
+            <p><%= userData.temporaryAddress %></p>
+         </div>
+
+         <div class="profile-field">
+            <label>Office Address:</label>
+            <p><%= userData.officeAddress %></p>
+         </div>
+
+         <div class="profile-field">
+            <label>Health Information:</label>
+            <p>Has Cancer: <%= userData.hasCancer ? 'Yes' : 'No' %></p>
+            <p>Is Diabetic: <%= userData.isDiabetic ? 'Yes' : 'No' %></p>
+            <p>Is Handicapped: <%= userData.isHandicapped ? 'Yes' : 'No' %></p>
+         </div>
+
+         <div class="profile-field">
+            <label>Health Report:</label>
+            <% if (userData.healthReport) { %>
+               <a href="/<%= userData.healthReport %>" download>Download Health Report</a>
+            <% } else { %>
+               <p>No health report uploaded.</p>
+            <% } %>
+         </div>
+
+         <div class="button-container">
+            <button type="button" onclick="sendlocation()">Send Location to Nearest Hospital</button>
+            <button type="button" onclick="informfamily()">Inform Family Members</button>
+         </div>
+      </div>
+   </div>
+
+</body>
+</html>

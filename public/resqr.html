@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyResQR Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MyResQR</div>
+            <ul>
+        <li><a href="Home.html">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="faqs.html">FAQS</a></li> 
+        <li><a href="#about">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="form-container">
+            <form id="multiStepForm" method="POST" action="http://localhost:3000/submitForm" enctype="multipart/form-data">
+
+                <div id="step1" class="step">
+                    <h2>Step 1: MyResQR Credentials</h2>
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" required>
+                    <label for="passkey">Passkey:</label>
+                    <input type="password" name="passkey" id="passkey" required>
+                    <button type="button" onclick="nextStep(1)">Continue</button>
+                </div>
+
+                <div id="step2" class="step" style="display:none;">
+                    <h2>Step 2: Personal Information</h2>
+                    <div class="circular-preview">
+                        <img id="profile-image" src="placeholder.png" alt="Profile Preview">
+                    </div>
+                    <label for="fullName">Your Name:</label>
+                    <input type="text" name="fullName" id="fullName" required>
+                    <label for="photoUpload">Upload your Photo:</label>
+                    <input type="file" name="photoUpload" id="photoUpload" accept="image/*" onchange="previewImage(event)" required>
+                    <label for="aadharUpload">Upload Aadhar Card:</label>
+                    <input type="file" name="aadharUpload" id="aadharUpload" accept="image/*" required>
+                    <label for="licenseUpload">Upload Driving License:</label>
+                    <input type="file" name="licenseUpload" id="licenseUpload" accept="image/*" required>
+                    <label for="vehicleType">Type of Vehicle:</label>
+                    <select name="vehicleType" id="vehicleType" required>
+                        <option value="">Select</option>
+                        <option value="car">Car</option>
+                        <option value="bike">Bike</option>
+                        <option value="heavy-vehicle">Heavy Vehicle</option>
+                    </select>
+                    <button type="button" onclick="nextStep(2)">Continue</button>
+                </div>
+
+                 <!-- Step 3: Address Information -->
+                <div id="step3" class="step" style="display:none;">
+                    <h2>Step 3: Address Information</h2>
+                    <label for="fatherName">Father's Name:</label>
+                    <input type="text" name="fatherName" id="fatherName" required>
+                    <label for="motherName">Mother's Name:</label>
+                    <input type="text" name="motherName" id="motherName" required>
+                    <label for="permanentAddress">Permanent Address:</label>
+                    <input type="text" name="permanentAddress" id="permanentAddress" required>
+                    <label for="temporaryAddress">Temporary Address:</label>
+                    <input type="text" name="temporaryAddress" id="temporaryAddress" required>
+                    <label for="officeAddress">Office Address:</label>
+                    <input type="text" name="officeAddress" id="officeAddress" required>
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="tel" name="phoneNumber" id="phoneNumber" required>
+                    <button type="button" onclick="nextStep(3)">Continue</button>
+                </div>
+
+                <!-- Step 4: Health Information -->
+                <div id="step4" class="step" style="display:none;">
+                    <h2>Step 4: Health Information</h2>
+                    <label for="bloodGroup">Blood Group:</label>
+                    <input type="text" name="bloodGroup" id="bloodGroup" required>
+                    <label for="gender">Gender:</label>
+                    <select name="gender" id="gender" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <label for="hasCancer">Do you have cancer?</label>
+                    <input type="checkbox" name="hasCancer" id="hasCancer">
+                    <label for="isHandicapped">Are you handicapped?</label>
+                    <input type="checkbox" name="isHandicapped" id="isHandicapped">
+                    <label for="isDiabetic">Are you diabetic?</label>
+                    <input type="checkbox" name="isDiabetic" id="isDiabetic">
+                    <label for="healthReportUpload">Upload Health Report (if any):</label>
+                    <input type="file" name="healthReportUpload" id="healthReportUpload" accept="image/*">
+                    <button type="button" onclick="nextStep(4)">Continue</button>
+                </div>
+
+                <!-- Step 5: Emergency Contact -->
+                <div id="step5" class="step" style="display:none;">
+                    <h2>Step 5: Emergency Contact Details</h2>
+                    <label for="emergencyName">Emergency Contact Name:</label>
+                    <input type="text" name="emergencyName" id="emergencyName" required>
+                    <label for="emergencyPhone">Emergency Contact Phone:</label>
+                    <input type="tel" name="emergencyPhone" id="emergencyPhone" required>
+                    <label for="emergencyRelation">Relation:</label>
+                    <input type="text" name="emergencyRelation" id="emergencyRelation" required>
+                    <button type="button" onclick="addAnotherContact()">Add Another Contact</button>
+                    <button type="button" onclick="nextStep(5)">Continue</button>
+                </div>
+                
+                <div id="step6" class="step" style="display:none;">
+                    <h2>Step 6: QR Code Generation</h2>
+                    <div id="qrCodeContainer"></div>
+                    <button type="button" onclick="generateQRCode()">Generate QR Code</button>
+                    <button type="button" onclick="downloadQRCode()">Download QR Code</button>
+                    <button type="submit">Submit Form</button> <!-- Submit button -->
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 MyResQR. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

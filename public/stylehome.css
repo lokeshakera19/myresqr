@@ -1,0 +1,309 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .right-button {
+    position: absolute;
+    right: 10px; /* Distance from the right edge */
+    top: 20px;  /* Optional: Distance from the top */
+  }
+
+  button.right-button {
+    background-color: #ff5252;  /* Red background */
+    color: white;               /* White text color */
+    padding: 5px 20px;         /* Padding inside the button */
+    border: none;               /* Remove default border */
+    border-radius: 5px;         /* Rounded corners */
+    font-size: 16px;            /* Font size */
+    cursor: pointer;            /* Change cursor on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: background-color 0.3s ease;  /* Smooth transition for hover effect */
+  }
+  
+  /* Hover effect */
+  button.right-button:hover {
+    background-color: #e63946; /* Darker red on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Slightly larger shadow */
+  }
+  
+  
+  
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    }
+
+    nav ul li {
+        margin: 0 20px;
+    }
+
+    nav ul li img{
+      height: 40px;
+    }
+
+    nav ul li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    nav ul li a:hover {
+        color: rgb(18, 148, 191);
+        text-decoration: underline;
+    }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .cta {
+    background-color: #ff5252;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+  }
+
+  .main-container {
+    display: flex;
+    justify-content: space-between; /* Adds space between the two sections */
+    align-items: center; /* Vertically center the sections */
+    height: 70vh; /* Make the container take the full viewport height */
+    padding:20px; /* Optional: Add some padding on the sides */
+}
+  
+  #hero {
+    flex: 1; /* Takes available space on the left */
+    padding-right: 20px; /* Adds space between the hero and slideshow */
+}
+
+#hero .image-section {
+    text-align: center; /* Align the image center inside the hero section */
+}
+
+#hero img {
+    width:500px; /* Make sure the image is responsive */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Slideshow section */
+#slideshow {
+    flex: 1; /* Takes available space on the right */
+}
+
+.slideshow-container {
+    display: block;
+    width: 100%; /* Make the slideshow take full width of its container */
+}
+
+.dots-container {
+    text-align: center; /* Center the dots below the slideshow */
+    margin-top: 10px; /* Add some space between the slideshow and dots */
+}
+
+/* Optional: Add styling for the slides */
+.mySlides {
+    text-align: left; /* Aligns text within each slide to the left */
+}
+
+.mySlides h1 {
+  font-size: 3rem; /* Adjust the value to make it larger */
+  font-weight: bold; /* Optional: Make the heading bold */
+}
+
+.mySlides p {
+  font-size: 1.25rem; /* Adjust the value to make the paragraph larger */
+  line-height: 1.6; /* Optional: Add more spacing between lines for readability */
+}
+
+
+  .fade {
+      animation-name: fade;
+      animation-duration: 1.5s;
+  }
+
+  @keyframes fade {
+      from {opacity: .4}
+      to {opacity: 1}
+  }
+
+  /* Previous/next buttons */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    padding: 16px;
+    z-index: 1;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.prev {
+    left: 700px;
+}
+
+.next {
+    right: 10px;
+}
+
+  .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+  }
+
+  /* Dots */
+  .dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .active, .dot:hover {
+      background-color: #717171;
+  }
+  
+  /* Features Section Styling */
+#features {
+    display: flex;  
+    flex-wrap: wrap;             /* Flexbox to align items in a row */
+    justify-content: space-around; /* Evenly space out the feature items */
+    padding: 50px;               /* Add padding around the section */
+    background-color: #f7f7f7;   /* Light background color */
+    text-align: center;          /* Center-align the text inside each feature */
+  }
+  
+  .feature {
+    flex-basis: 30%;
+    margin-bottom: 20px;
+    background-color: white;     /* Background color for each feature box */
+    padding: 20px;               /* Add padding inside each feature box */
+    width: 30%;                  /* Control width of each feature box */
+    border-radius: 10px;         /* Round the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Add a soft shadow for depth */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth animation on hover */
+  }
+  
+  .feature h2 {
+    font-size: 24px;             /* Increase font size of headings */
+    color: #ff5252;              /* Red color for the headings */
+    margin-bottom: 10px;         /* Add space below the heading */
+  }
+  
+  .feature p {
+    font-size: 16px;             /* Set font size for the description */
+    color: #555;                 /* Gray text color for the description */
+  }
+  
+  .feature:hover {
+    /* Move the box upwards on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deepen shadow on hover */
+  }
+
+/* Basic styling for the slider */  
+  
+  
+  footer {
+    background-color: #2b2b2b; /* Dark background for contrast */
+    color: #f1f1f1; /* Light text color */
+    padding: 40px 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  footer .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  footer .comp {
+    flex-basis: 22%;
+    margin-bottom: 20px;
+  }
+  
+  footer .h3-mb4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+
+  footer img{
+    vertical-align: middle;
+    height : 75px;
+    border-radius: 10px; 
+  }
+  
+  footer ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  footer ul li {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  footer ul li:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  footer p {
+    font-size: 14px;
+    margin-top: 20px;
+    text-align: center;
+    color: #888;
+  }
+  
+  footer p a {
+    color: #f1f1f1;
+    text-decoration: none;
+  }
+  
+  footer p a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    footer .comp {
+      flex-basis: 45%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    footer .comp {
+      flex-basis: 100%;
+    }
+  }
+  
+  
