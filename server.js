@@ -191,8 +191,11 @@ app.post('/submitForm', upload.fields([
 app.post('/submitForm', upload.fields([{ name: 'photoUpload' }, { name: 'aadharUpload' }, { name: 'licenseUpload' }, { name: 'healthReportUpload' }]), async (req, res) => {
     try {
         // Extract form data and construct user URL
-        const userPageURL = `http://localhost:3000/user/${req.body.username}`;
-        const qrCodePath = path.join('/qrcodes', `${req.body.username}-qr.png`);
+       const renderBaseURL = 'https://rescueqr.onrender.com'; // Replace with your actual Render link
+    const uniqueURL = `${renderBaseURL}/user/${req.body.username}-${Date.now()}`;
+    const qrCodeFilename = `${req.body.username}-${Date.now()}.png`;
+
+
 
         // Generate QR Code
         await QRCode.toFile(path.join(__dirname, 'public', qrCodePath), userPageURL);
