@@ -140,7 +140,7 @@ app.post('/submitForm', upload.fields([
     { name: 'licenseUpload', maxCount: 1 },
     { name: 'healthReportUpload', maxCount: 1 }
 ]), (req, res) => {
-    const uniqueURL = `/user/${req.body.username}-${Date.now()}`;
+    const uniqueURL = `https://rescueqr.life/user/${req.body.username}-${Date.now()}`;
     const qrCodeFilename = `${req.body.username}-${Date.now()}.png`;
 
     const formData = {
@@ -191,7 +191,7 @@ app.post('/submitForm', upload.fields([
 app.post('/submitForm', upload.fields([{ name: 'photoUpload' }, { name: 'aadharUpload' }, { name: 'licenseUpload' }, { name: 'healthReportUpload' }]), async (req, res) => {
     try {
         // Extract form data and construct user URL
-       const renderBaseURL = 'https://rescueqr.onrender.com'; // Replace with your actual Render link
+       const renderBaseURL = 'https://rescueqr.life'; // Replace with your actual Render link
     const uniqueURL = `${renderBaseURL}/user/${req.body.username}-${Date.now()}`;
     const qrCodeFilename = `${req.body.username}-${Date.now()}.png`;
 
