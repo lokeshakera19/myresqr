@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt'); // For password hashing
 const twilio = require('twilio');
 
 const app = express();
-const PORT = 3000; //hjdtrsttg
+const PORT = 3000;
 
 // Twilio credentials
 const accountSid = 'ACa5c92868a113de7e986c9af7a499390b'; // Replace with your Account SID
@@ -28,16 +28,16 @@ app.use('/qrcodes', express.static(path.join(__dirname, 'public/qrcodes')));
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
 
-// MongoDB connection
-mongoose.connect('mongodb://localhost:27017/myresqr', {
+
+mongoose.connect('mongodb+srv://LokeshAkera:fy1lRW8OzlCIJxdV@cluster1.c46ua.mongodb.net/', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-}).then(() => {
-    console.log('Connected to MongoDB');
-}).catch((err) => {
-    console.error('Failed to connect to MongoDB', err);
-});
-
+  }).then(() => {
+    console.log('Connected to MongoDB Atlas');
+  }).catch((err) => {
+    console.error('Failed to connect to MongoDB Atlas', err);
+  });
+  
 // Multer storage configuration
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -140,7 +140,7 @@ app.post('/submitForm', upload.fields([
     { name: 'licenseUpload', maxCount: 1 },
     { name: 'healthReportUpload', maxCount: 1 }
 ]), (req, res) => {
-    const uniqueURL = `https://rescueqr.life/user/${req.body.username}-${Date.now()}`;
+    const uniqueURL = `https://rescueqr.onrender.com/user/${req.body.username}-${Date.now()}`;
     const qrCodeFilename = `${req.body.username}-${Date.now()}.png`;
 
     const formData = {
@@ -191,14 +191,12 @@ app.post('/submitForm', upload.fields([
 app.post('/submitForm', upload.fields([{ name: 'photoUpload' }, { name: 'aadharUpload' }, { name: 'licenseUpload' }, { name: 'healthReportUpload' }]), async (req, res) => {
     try {
         // Extract form data and construct user URL
-       const renderBaseURL = 'https://rescueqr.life'; // Replace with your actual Render link
-    const uniqueURL = `${renderBaseURL}/user/${req.body.username}-${Date.now()}`;
-    const qrCodeFilename = `${req.body.username}-${Date.now()}.png`;
-
-
+        const userPageURL = `https://rescueqr.onrender.com/user/${req.body.username}`;
+        const qrCodePath = path.join('/qrcodes', `${req.body.username}-qr.png`);
 
         // Generate QR Code
         await QRCode.toFile(path.join(__dirname, 'public', qrCodePath), userPageURL);
+      
 
         // Save data to MongoDB
         const formData = new FormData({
