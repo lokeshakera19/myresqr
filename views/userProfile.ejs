@@ -130,6 +130,11 @@
             alert('Geolocation is not supported by this browser.');
          }
       }
+
+      function downloadQR() {
+        const username = '<%= userData.username %>'; // Retrieve username dynamically
+        window.location.href = `/download-qr/${username}`; // Redirect to the QR code download route
+      }
    </script>
 </head>
 <body>
@@ -210,6 +215,7 @@
          <div class="button-container">
             <button type="button" onclick="sendlocation()">Send Location to Nearest Hospital</button>
             <button type="button" onclick="informfamily()">Inform Family Members</button>
+            <button type="button" onclick="downloadQR()">Download QR Code</button>
          </div>
       </div>
    </div>
