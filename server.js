@@ -294,6 +294,32 @@ app.get('/user/:username', (req, res) => {
         });
 });
 
+app.get('/download-qr/:username', async (req, res) => {
+    try {
+        const username = req.params.username;
+        const fullURL = `https://rescueqr.life/user/${username}`; // Construct the user profile URL
+        const qrCodeFileName = `${username}-qr.png`;
+        const qrCodePath = path.join(__dirname, 'uploads', qrCodeFileName); // Save in uploads directory
+
+        // Generate QR Code and save to file
+        await QRCode.toFile(qrCodePath, fullURL);
+
+        // Send the file as a downloadable response
+        res.download(qrCodePath, qrCodeFileName, (err) => {
+            if (err) {
+                console.error('Error sending file:', err);
+                res.status(500).send('Error generating or sending QR code');
+            }
+
+            // Optionally delete the file after sending it to the client
+            // fs.unlink(qrCodePath, () => console.log('QR code file deleted.'));
+        });
+    } catch (error) {
+        console.error('Error generating QR code:', error);
+        res.status(500).send('Failed to generate QR code');
+    }
+});
+
 
 // Start server
 app.listen(PORT, () => {
