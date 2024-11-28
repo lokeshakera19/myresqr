@@ -294,29 +294,32 @@ app.get('/user/:username', (req, res) => {
         });
 });
 
-app.get('/download-qr/:username', async (req, res) => {
+app.get('/generate-qr/:username', async (req, res) => {
+    const username = req.params.username;
+    const userPageURL = `https://rescueqr.life/user/${username}`;
+    const qrCodeFilename = `${username}-profile-qr.png`;
+    const qrCodePath = path.join(qrCodeDir, qrCodeFilename);
+
     try {
-        const username = req.params.username;
-        const fullURL = `https://rescueqr.life/user/${username}`; // Construct the user profile URL
-        const qrCodeFileName = `${username}-qr.png`;
-        const qrCodePath = path.join(__dirname, 'uploads', qrCodeFileName); // Save in uploads directory
+        // Generate high-quality QR code with options
+        await QRCode.toFile(qrCodePath, userPageURL, {
+            errorCorrectionLevel: 'H', // High error correction
+            type: 'png',
+            quality: 1, // Highest quality
+            margin: 1, // Minimal margin
+            scale: 10, // Higher resolution
+        });
 
-        // Generate QR Code and save to file
-        await QRCode.toFile(qrCodePath, fullURL);
-
-        // Send the file as a downloadable response
-        res.download(qrCodePath, qrCodeFileName, (err) => {
+        // Send the file as a downloadable attachment
+        res.download(qrCodePath, qrCodeFilename, (err) => {
             if (err) {
                 console.error('Error sending file:', err);
-                res.status(500).send('Error generating or sending QR code');
+                res.status(500).send('Error generating QR code for download');
             }
-
-            // Optionally delete the file after sending it to the client
-            // fs.unlink(qrCodePath, () => console.log('QR code file deleted.'));
         });
     } catch (error) {
         console.error('Error generating QR code:', error);
-        res.status(500).send('Failed to generate QR code');
+        res.status(500).send('Error generating QR code');
     }
 });
 
