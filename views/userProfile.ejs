@@ -215,7 +215,9 @@
          <div class="button-container">
             <button type="button" onclick="sendlocation()">Send Location to Nearest Hospital</button>
             <button type="button" onclick="informfamily()">Inform Family Members</button>
-            <button type="button" onclick="downloadQR()">Download QR Code</button>
+            <a href="/generate-qr/<%= userData.username %>" download>
+               <button type="button">Download QR Code</button>
+            </a>
          </div>
       </div>
    </div>
