@@ -143,7 +143,7 @@ app.post('/submitForm', upload.fields([
     const uniqueURL = `https://rescueqr.life/user/${req.body.username}-${Date.now()}`;
     const qrCodeFilename = `${req.body.username}-${Date.now()}.png`;
 
-    const formData = {
+   const formData = {
         username: req.body.username,
         passkey: req.body.passkey,
         fullName: req.body.fullName,
@@ -166,9 +166,10 @@ app.post('/submitForm', upload.fields([
         emergencyName: req.body.emergencyName,
         emergencyPhone: req.body.emergencyPhone,
         emergencyRelation: req.body.emergencyRelation,
-        userPageURL: uniqueURL,
+        userPageURL: uniqueURL, // Full URL saved
         qrCodePath: `qrcodes/${qrCodeFilename}`
-    };
+};
+
 
     const newFormData = new FormData(formData);
     newFormData.save()
@@ -278,8 +279,9 @@ app.post('/send-locationtofamily', (req, res) => {
 // Route to display user details based on the unique URL
 app.get('/user/:username', (req, res) => {
     const username = req.params.username;
+    const fullURL = `https://rescueqr.life/user/${username}`;  // Construct the full URL
 
-    FormData.findOne({ userPageURL: `/user/${username}` })
+    FormData.findOne({ userPageURL: fullURL })
         .then((userData) => {
             if (!userData) {
                 return res.status(404).send('User not found');
@@ -291,6 +293,7 @@ app.get('/user/:username', (req, res) => {
             res.status(500).send('Error retrieving user data');
         });
 });
+
 
 // Start server
 app.listen(PORT, () => {
