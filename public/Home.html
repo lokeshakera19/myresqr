@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RescueQR</title>
+  <title>myresQR - Scan to Save</title>
   <link rel="stylesheet" href="stylehome.css">
 </head>
 <body>
@@ -12,9 +12,10 @@
       <ul style = "text-align : center;">
         <li><img src="Images/logo.jpg"></li>
         <li><a href="Home.html">Home</a></li>
-        <li><a href="#about">About Us</a></li>
+        <li><a href="index.html">About Us</a></li>
         <li><a href="faqs.html">FAQS</a></li>
-        <li><a href="#about">Contact Us</a></li>
+        <li><a href="#contact-us">Contact Us</a></li>
+
      
         <li>
           <div class="button-container">
@@ -45,13 +46,23 @@
       </div>
   
       <div class="mySlides fade">
-        <h1>Unforeseen Emergency??</h1>
-        <p>Have you or youe loved ones met with an unforeseen emergency???</p>
+        <h1>Be Seen, Be Saved</h1>
+        <p>Make every emergency moment count with myresQR.</p>
+        
       </div>
   
       <div class="mySlides fade">
-        <h1>Unforeseen Emergency??</h1>
-        <p>Have you or youe loved ones met with an unforeseen emergency???</p>
+        <h1>Your Emergency Ally</h1>
+        <p>Secure vital information to protect yourself and your loved ones.</p>
+        
+      </div>
+  
+      
+      <div class="mySlides fade">
+        <h1>Accidents Happen</h1>
+        <p>But with myresQR, help is just a scan away!</p>
+        
+        
       </div>
   
       <!-- Next and previous buttons -->
@@ -108,10 +119,37 @@
       <p>Always prepared for emergencies</p>
     </div>
   </section>
-
-  <footer>
-    <p>© 2024 MyResQR. All rights reserved.</p>
-</footer>
+  <footer id="contact-us">
+    <div class="footer-container">
+      <!-- Contact Us Section -->
+      <div class="contact-us">
+        <h3 class="contact-title">🚨 Contact Us</h3>
+        <form action="submit_contact_form.php" method="post">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+          <button type="submit" class="emergency-button">Send Message</button>
+        </form>
+      </div>
+  
+      <!-- Additional Info -->
+      <div class="footer-info">
+        <h3 class="contact-title">📞 Reach Us At</h3>
+        <p><strong>Email:</strong> <a href="mailto:support@myresqr.com">support@myresqr.com</a></p>
+        <p><strong>Phone:</strong> +1 234 567 890</p>
+        <h3 class="contact-title">🌐 Follow Us</h3>
+        <div class="social-icons">
+          <a href="#"><img src="Images/logo.jpg" alt="Facebook"></a>
+          <a href="#"><img src="Images/logo.jpg" alt="Twitter"></a>
+          <a href="#"><img src="Images/logo.jpg" alt="Instagram"></a>
+        </div>
+      </div>
+    </div>
+    <p class="footer-note">© 2024 MyResQR. All rights reserved.</p>
+  </footer>
+  
+  
+  
 
 
 <script src="scripthome.js"></script>
