@@ -5,7 +5,7 @@ body {
     background-color: #f4f4f4;
 }
 header {
-    background-color: #333;
+    background-color: #003366;
     color: white;
     padding: 1em;
     text-align: center;
@@ -71,12 +71,67 @@ main {
     display: none; /* Answers are hidden by default */
     padding: 15px;
 }
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  flex-wrap: wrap;
+}
+
+.contact-us {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.contact-us h3 {
+  margin-bottom: 10px;
+}
+
+.contact-us input, .contact-us textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-us button {
+  padding: 10px 20px;
+  background-color: #ff5722;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact-us button:hover {
+  background-color: #e64a19;
+}
+
+.footer-info {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.footer-info h3 {
+  margin-bottom: 10px;
+}
+
+.footer-info a {
+  color: #ff5722;
+  text-decoration: none;
+}
+
+.footer-info a:hover {
+  text-decoration: underline;
+}
+
+.footer-info img {
+  width: 24px;
+  margin-right: 10px;
+}
+html {
+  scroll-behavior: smooth;
 }
