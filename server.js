@@ -12,8 +12,8 @@ const app = express();//jyfydyu
 const PORT = 3000;//jyfjyfu
 
 // Twilio credentials
-const accountSid = 'ACa5c92868a113de7e986c9af7a499390b'; // Replace with your Account SID
-const authToken = '2c31c13c12a95c5fa5b28501682c8038'; // Replace with your Auth Token
+const accountSid = 'AC055f7e77554d9e2e0b20345b59422c64'; // Replace with your Account SID
+const authToken = 'f4f629c374370072a6245c85ec9d5f04'; // Replace with your Auth Token
 const client = twilio(accountSid, authToken);
 
 // Middleware to parse incoming requests
@@ -233,8 +233,8 @@ app.post('/send-location', (req, res) => {
     client.messages
         .create({
             body: messageBody,
-            from: '+19282373713', // Replace with your Twilio number
-            to: '+919963715476' // Replace with your personal number
+            from: '+13612735212', // Replace with your Twilio number
+            to: '+916301437823' // Replace with your personal number
         })
         .then(message => {
             console.log(`Message sent: ${message.sid}`); // Log message SID
@@ -261,8 +261,8 @@ app.post('/send-locationtofamily', (req, res) => {
     client.messages
         .create({
             body: messageBody,
-            from: '+19282373713', // Replace with your Twilio number
-            to: '+919963715476' // Replace with your personal number
+            from: '+13612735212', // Replace with your Twilio number
+            to: '+916301437823' // Replace with your personal number
         })
         .then(message => {
             console.log(`Message sent: ${message.sid}`); // Log message SID
